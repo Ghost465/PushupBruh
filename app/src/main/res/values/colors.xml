@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Light Theme Colors -->
+    <color name="background_primary">#F5F5F5</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="background_dialog">#FFFFFF</color>
+    <color name="background_input">#F5F5F5</color>
+    <color name="background_icon">#E8F8F5</color>
+    <color name="background_calendar_grid">#FFFFFF</color>
+    
+    <color name="text_primary">#2C3E50</color>
+    <color name="text_secondary">#7F8C8D</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    
+    <color name="accent_blue">#3498DB</color>
+    <color name="accent_orange">#FF8C42</color>
+    <color name="accent_orange_dark">#FF6B35</color>
+    
+    <color name="navigation_bg">#F5F5F5</color>
 </resources>
