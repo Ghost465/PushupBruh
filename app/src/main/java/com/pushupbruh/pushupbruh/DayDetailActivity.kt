@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.content.Intent
 import android.app.AlertDialog
 import android.view.LayoutInflater
+import android.app.ActivityOptions
+import android.util.Pair
 
 class DayDetailActivity : AppCompatActivity() {
     private lateinit var pushupCountDisplay: TextView
@@ -165,8 +167,13 @@ class DayDetailActivity : AppCompatActivity() {
         intent.putExtra("day", newDay)
         intent.putExtra("month", newMonth)
         intent.putExtra("year", newYear)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        
+        val options = ActivityOptions.makeCustomAnimation(
+            this, 
+            R.anim.slide_in_left, 
+            R.anim.slide_out_right
+        )
+        startActivity(intent, options.toBundle())
         finish()
     }
     
@@ -213,8 +220,13 @@ class DayDetailActivity : AppCompatActivity() {
         intent.putExtra("day", newDay)
         intent.putExtra("month", newMonth)
         intent.putExtra("year", newYear)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        
+        val options = ActivityOptions.makeCustomAnimation(
+            this, 
+            R.anim.slide_in_right, 
+            R.anim.slide_out_left
+        )
+        startActivity(intent, options.toBundle())
         finish()
     }
 }

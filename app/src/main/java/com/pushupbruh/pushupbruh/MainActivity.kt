@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.os.Vibrator
 import android.os.VibrationEffect
+import android.os.VibratorManager
 import android.content.Context
 import android.widget.Toast
 
@@ -35,10 +36,15 @@ class MainActivity : AppCompatActivity() {
         todayCountText = findViewById(R.id.todayCountText)
         
         // Initialize vibrator
-        vibrator = try {
-            getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
-        } catch (e: Exception) {
-            null
+        vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            getSystemService(VibratorManager::class.java)?.defaultVibrator
+        } else {
+            try {
+                @Suppress("DEPRECATION")
+                getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+            } catch (e: Exception) {
+                null
+            }
         }
         
         // Load today's pushup count
@@ -79,7 +85,8 @@ class MainActivity : AppCompatActivity() {
         try {
             vibrator?.let { vib ->
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    vib.vibrate(100)
+                    val vibrationEffect = VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+                    vib.vibrate(vibrationEffect)
                 } else {
                     @Suppress("DEPRECATION")
                     vib.vibrate(100)
