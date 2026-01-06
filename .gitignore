@@ -34,6 +34,9 @@ proguard/
 # Android Studio captures folder
 captures/
 
+# App Insights settings (local IDE configuration)
+.idea/appInsightsSettings.xml
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
