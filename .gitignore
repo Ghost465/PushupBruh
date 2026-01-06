@@ -14,6 +14,10 @@ bin/
 gen/
 out/
 build/
+app/build/
+*.apk
+*.ap_
+*.aab
 
 # Gradle files
 .gradle/
