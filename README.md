@@ -58,6 +58,12 @@ Because simple works better than complex:
 
 ## 📥 Installation
 
+### 🚀 Easy Install (Recommended)
+1. Go to [**Releases**](https://github.com/Ghost465/PushupBruh/releases)
+2. Download the latest `PushupBruh-release-v*.apk`
+3. Enable "Install from unknown sources" on your device
+4. Install and start your pushup journey!
+
 ### From Source
 ```bash
 git clone https://github.com/Ghost465/PushupBruh.git
