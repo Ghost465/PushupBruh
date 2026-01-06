@@ -50,14 +50,18 @@ jobs:
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "app_version=$(grep 'versionName' app/build.gradle | sed 's/.*"\(.*\)".*/\1/')" >> $GITHUB_OUTPUT
         
+    - name: Find APK files
+      id: find_apks
+      run: |
+        echo "debug_apk=$(find app/build/outputs/apk/debug -name '*.apk' -type f | head -1)" >> $GITHUB_OUTPUT
+        echo "release_apk=$(find app/build/outputs/apk/release -name '*.apk' -type f | head -1)" >> $GITHUB_OUTPUT
+        
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.version_info.outputs.version }}
-        release_name: PushupBruh ${{ steps.version_info.outputs.version }}
+        name: PushupBruh ${{ steps.version_info.outputs.version }}
         body: |
           ## PushupBruh ${{ steps.version_info.outputs.version }}
           
@@ -75,29 +79,6 @@ jobs:
           **Build Date:** ${{ github.event.head_commit.timestamp }}
         draft: false
         prerelease: false
-        
-    - name: Find APK files
-      id: find_apks
-      run: |
-        echo "debug_apk=$(find app/build/outputs/apk/debug -name '*.apk' -type f | head -1)" >> $GITHUB_OUTPUT
-        echo "release_apk=$(find app/build/outputs/apk/release -name '*.apk' -type f | head -1)" >> $GITHUB_OUTPUT
-        
-    - name: Upload Debug APK
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.find_apks.outputs.debug_apk }}
-        asset_name: app-debug.apk
-        asset_content_type: application/vnd.android.package-archive
-        
-    - name: Upload Release APK
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ steps.find_apks.outputs.release_apk }}
-        asset_name: app-release.apk
-        asset_content_type: application/vnd.android.package-archive
+        files: |
+          ${{ steps.find_apks.outputs.debug_apk }}
+          ${{ steps.find_apks.outputs.release_apk }}
