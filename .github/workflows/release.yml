@@ -89,7 +89,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ${{ steps.find_apks.outputs.debug_apk }}
-        asset_name: PushupBruh-debug-v${{ steps.version_info.outputs.app_version }}.apk
+        asset_name: app-debug.apk
         asset_content_type: application/vnd.android.package-archive
         
     - name: Upload Release APK
@@ -99,5 +99,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ${{ steps.find_apks.outputs.release_apk }}
-        asset_name: PushupBruh-release-v${{ steps.version_info.outputs.app_version }}.apk
+        asset_name: app-release.apk
         asset_content_type: application/vnd.android.package-archive

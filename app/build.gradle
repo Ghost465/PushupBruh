@@ -29,12 +29,6 @@ android {
         jvmTarget = '1.8'
     }
     
-    applicationVariants.all { variant ->
-        variant.outputs.all {
-            def fileName = "PushupBruh-${variant.buildType.name}-v${defaultConfig.versionName}.apk"
-            outputFileName = fileName
-        }
-    }
 }
 
 dependencies {
